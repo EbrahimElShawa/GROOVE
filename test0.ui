@@ -12,8 +12,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1014</width>
-    <height>796</height>
+    <width>675</width>
+    <height>613</height>
    </rect>
   </property>
   <property name="palette">
@@ -462,13 +462,29 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="firstButton">
+   <widget class="QRadioButton" name="radioButton">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>580</y>
-      <width>280</width>
-      <height>100</height>
+      <x>140</x>
+      <y>160</y>
+      <width>141</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>Just do it!</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="teaser">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>260</y>
+      <width>311</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="font">
@@ -484,6 +500,9 @@
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="statusTip">
+     <string>You really wanna press it?!</string>
     </property>
     <property name="text">
      <string>You gonna press me soon enough</string>
