@@ -12,20 +12,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>762</width>
-    <height>426</height>
+    <width>1200</width>
+    <height>700</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>762</width>
-    <height>426</height>
+    <width>1200</width>
+    <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>762</width>
-    <height>426</height>
+    <width>1200</width>
+    <height>700</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -235,20 +241,20 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>329</y>
-      <width>762</width>
+      <y>580</y>
+      <width>1200</width>
       <height>120</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>762</width>
+      <width>1200</width>
       <height>120</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>762</width>
+      <width>1200</width>
       <height>120</height>
      </size>
     </property>
@@ -358,10 +364,10 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>585</x>
        <y>30</y>
-       <width>41</width>
-       <height>41</height>
+       <width>50</width>
+       <height>50</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -393,7 +399,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>assets/image_2.png</normaloff>assets/image_2.png</iconset>
+       <normaloff>assets/Play.png</normaloff>assets/Play.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -413,8 +419,8 @@ QPushButton:pressed {
     <property name="geometry">
      <rect>
       <x>700</x>
-      <y>170</y>
-      <width>35</width>
+      <y>140</y>
+      <width>40</width>
       <height>35</height>
      </rect>
     </property>
@@ -426,8 +432,7 @@ QPushButton:pressed {
 	color: rgb(190, 200, 186);
 	border-style: outset;
 border-radius: 15px;
-	background-color: qlineargradient(spread:pad, x1:0.17, y1:0.147727, x2:0.704545, y2:0.733, stop:0 rgba(184, 52, 255, 255), stop:1 rgba(9, 20, 84, 255));
-	
+	background-color: qlineargradient(spread:pad, x1:0.17, y1:0.147727, x2:0.556818, y2:0.614, stop:0 rgba(218, 149, 255, 255), stop:1 rgba(9, 20, 84, 255));
 }
 
 
@@ -438,7 +443,7 @@ border-radius: 15px;
     </property>
     <property name="icon">
      <iconset>
-      <normaloff>C:/Users/TOWER-PC/Desktop/sound-effect.png</normaloff>C:/Users/TOWER-PC/Desktop/sound-effect.png</iconset>
+      <normaloff>assets/Effects.png</normaloff>assets/Effects.png</iconset>
     </property>
     <property name="iconSize">
      <size>
@@ -450,10 +455,10 @@ border-radius: 15px;
    <widget class="QLabel" name="song_name">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>450</x>
       <y>10</y>
-      <width>491</width>
-      <height>51</height>
+      <width>500</width>
+      <height>60</height>
      </rect>
     </property>
     <property name="minimumSize">
