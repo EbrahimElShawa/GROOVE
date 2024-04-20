@@ -241,7 +241,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>550</y>
+      <y>560</y>
       <width>1200</width>
       <height>150</height>
      </rect>
@@ -742,6 +742,9 @@ QPushButton:pressed {
       <height>51</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
@@ -804,5 +807,25 @@ border-radius: 15px;</string>
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>effButton1</sender>
+   <signal>clicked()</signal>
+   <receiver>AudioProcessor</receiver>
+   <slot>on_shuffle_button_clicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1147</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1059</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_shuffle_button_clicked()</slot>
+ </slots>
 </ui>
