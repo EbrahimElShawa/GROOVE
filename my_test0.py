@@ -3,6 +3,16 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 
 
+class AspectRatioButton(QtWidgets.QPushButton):
+    def __init__(self, text, parent=None):
+        super().__init__(text, parent)
+
+    def resizeEvent(self, event):
+        size = self.size()
+        new_height = size.width()
+        self.setFixedSize(size.width(), new_height)
+
+
 class Main_Window(QMainWindow):
     def __init__(self):
         super(Main_Window, self).__init__()     # Calling the superclass constructor with argument 'Main_Window'
@@ -10,6 +20,7 @@ class Main_Window(QMainWindow):
         self.setWindowTitle("My First Window")  # Setting the title of the window
         self.setupUI(self)                          # Calling the setupUI() method
         self.initUI()                           # Calling the initUI() method
+
 
     def setupUI(self, window):
         palette = QtGui.QPalette()
