@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'test0.ui'
+# Form implementation generated from reading ui file '.\test0.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -91,12 +91,11 @@ class Ui_AudioProcessor(object):
         brush = QtGui.QBrush(gradient)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         self.main_window.setPalette(palette)
-        self.main_window.setStyleSheet(
-            "background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0.5, stop:0 rgba(85, 142, 255, 254), stop:1 rgba(0, 26, 75, 255));")
+        self.main_window.setStyleSheet("background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0.5, stop:0 rgba(85, 142, 255, 254), stop:1 rgba(0, 26, 75, 255));")
         self.main_window.setObjectName("main_window")
         self.utilityBar = QtWidgets.QWidget(self.main_window)
         self.utilityBar.setEnabled(True)
-        self.utilityBar.setGeometry(QtCore.QRect(0, 550, 1200, 150))
+        self.utilityBar.setGeometry(QtCore.QRect(0, 560, 1200, 150))
         self.utilityBar.setMinimumSize(QtCore.QSize(1200, 120))
         self.utilityBar.setMaximumSize(QtCore.QSize(1200, 150))
         palette = QtGui.QPalette()
@@ -130,9 +129,9 @@ class Ui_AudioProcessor(object):
         self.utilityBar.setPalette(palette)
         self.utilityBar.setToolTipDuration(0)
         self.utilityBar.setStyleSheet("QWidget {\n"
-                                      "    border-radius: 25px 25px 0px 0px;\n"
-                                      "    background-color: #1D0070;\n"
-                                      "}")
+"    border-radius: 25px 25px 0px 0px;\n"
+"    background-color: #1D0070;\n"
+"}")
         self.utilityBar.setObjectName("utilityBar")
         self.play_button = QtWidgets.QPushButton(self.utilityBar)
         self.play_button.setEnabled(True)
@@ -147,12 +146,12 @@ class Ui_AudioProcessor(object):
         self.play_button.setToolTipDuration(-1)
         self.play_button.setWhatsThis("")
         self.play_button.setStyleSheet("\n"
-                                       "QPushButton:pressed {\n"
-                                       "        padding: 3px;\n"
-                                       "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.play_button.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("assets/Play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(".\\assets/Play.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.play_button.setIcon(icon)
         self.play_button.setIconSize(QtCore.QSize(70, 70))
         self.play_button.setFlat(False)
@@ -170,12 +169,12 @@ class Ui_AudioProcessor(object):
         self.plus10_button.setToolTipDuration(-1)
         self.plus10_button.setWhatsThis("")
         self.plus10_button.setStyleSheet("\n"
-                                         "QPushButton:pressed {\n"
-                                         "        padding: 3px;\n"
-                                         "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.plus10_button.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("assets/10sForewards.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(".\\assets/10sForewards.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.plus10_button.setIcon(icon1)
         self.plus10_button.setIconSize(QtCore.QSize(70, 70))
         self.plus10_button.setFlat(False)
@@ -193,12 +192,12 @@ class Ui_AudioProcessor(object):
         self.next_button.setToolTipDuration(-1)
         self.next_button.setWhatsThis("")
         self.next_button.setStyleSheet("\n"
-                                       "QPushButton:pressed {\n"
-                                       "        padding: 3px;\n"
-                                       "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.next_button.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("assets/Next.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(".\\assets/Next.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.next_button.setIcon(icon2)
         self.next_button.setIconSize(QtCore.QSize(75, 75))
         self.next_button.setFlat(False)
@@ -216,12 +215,12 @@ class Ui_AudioProcessor(object):
         self.minus10_button.setToolTipDuration(-1)
         self.minus10_button.setWhatsThis("")
         self.minus10_button.setStyleSheet("\n"
-                                          "QPushButton:pressed {\n"
-                                          "        padding: 3px;\n"
-                                          "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.minus10_button.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("assets/10sBackwards.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(".\\assets/10sBackwards.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.minus10_button.setIcon(icon3)
         self.minus10_button.setIconSize(QtCore.QSize(70, 70))
         self.minus10_button.setFlat(False)
@@ -239,12 +238,12 @@ class Ui_AudioProcessor(object):
         self.previous_button.setToolTipDuration(-1)
         self.previous_button.setWhatsThis("")
         self.previous_button.setStyleSheet("\n"
-                                           "QPushButton:pressed {\n"
-                                           "        padding: 3px;\n"
-                                           "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.previous_button.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("assets/Previous.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap(".\\assets/Previous.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.previous_button.setIcon(icon4)
         self.previous_button.setIconSize(QtCore.QSize(75, 75))
         self.previous_button.setFlat(False)
@@ -262,12 +261,12 @@ class Ui_AudioProcessor(object):
         self.shuffle_button.setToolTipDuration(-1)
         self.shuffle_button.setWhatsThis("")
         self.shuffle_button.setStyleSheet("\n"
-                                          "QPushButton:pressed {\n"
-                                          "        padding: 3px;\n"
-                                          "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.shuffle_button.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("assets/Shuffle.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap("assets/Shuffle_inactive.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.shuffle_button.setIcon(icon5)
         self.shuffle_button.setIconSize(QtCore.QSize(70, 70))
         self.shuffle_button.setFlat(False)
@@ -285,12 +284,12 @@ class Ui_AudioProcessor(object):
         self.volume_button.setToolTipDuration(-1)
         self.volume_button.setWhatsThis("")
         self.volume_button.setStyleSheet("\n"
-                                         "QPushButton:pressed {\n"
-                                         "        padding: 3px;\n"
-                                         "    }")
+"QPushButton:pressed {\n"
+"        padding: 3px;\n"
+"    }")
         self.volume_button.setText("")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("assets/Volume.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap(".\\assets/Volume.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.volume_button.setIcon(icon6)
         self.volume_button.setIconSize(QtCore.QSize(70, 70))
         self.volume_button.setFlat(False)
@@ -298,32 +297,52 @@ class Ui_AudioProcessor(object):
         self.effButton1 = QtWidgets.QPushButton(self.main_window)
         self.effButton1.setEnabled(True)
         self.effButton1.setGeometry(QtCore.QRect(1120, 180, 61, 51))
+        self.effButton1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.effButton1.setAutoFillBackground(False)
         self.effButton1.setStyleSheet("QPushButton {\n"
-                                      "    color: rgb(190, 200, 186);\n"
-                                      "    border-style: outset;\n"
-                                      "border-radius: 15px;\n"
-                                      "    background-color: qlineargradient(spread:pad, x1:0.17, y1:0.147727, x2:0.556818, y2:0.614, stop:0 rgba(218, 149, 255, 255), stop:1 rgba(9, 20, 84, 255));\n"
-                                      "}\n"
-                                      "\n"
-                                      "\n"
-                                      "")
+"    color: rgb(190, 200, 186);\n"
+"    border-style: outset;\n"
+"    border-radius: 15px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.056, y1:0.057, x2:0.449, y2:0.54, stop:0 rgba(154, 135, 255, 255), stop:1 rgba(9, 20, 84, 255));\n"
+"}\n"
+"\n"
+"\n"
+"")
         self.effButton1.setText("")
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("assets/Effects.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon7.addPixmap(QtGui.QPixmap(".\\assets/Effects.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.effButton1.setIcon(icon7)
         self.effButton1.setIconSize(QtCore.QSize(50, 50))
         self.effButton1.setObjectName("effButton1")
         self.song_name = QtWidgets.QLabel(self.main_window)
         self.song_name.setGeometry(QtCore.QRect(300, 15, 600, 80))
         self.song_name.setMinimumSize(QtCore.QSize(491, 0))
-        self.song_name.setStyleSheet(
-            "background-color: qlineargradient(spread:pad, x1:0, y1:0.125, x2:1, y2:1, stop:0 rgba(88, 88, 88, 255), stop:1 rgba(187, 187, 187, 255));\n"
-            "font: 18pt \"Forte\";\n"
-            "color: rgb(255, 255, 255);\n"
-            "text-align: center;\n"
-            "border-radius: 15px;")
+        self.song_name.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0.125, x2:1, y2:1, stop:0 rgba(88, 88, 88, 255), stop:1 rgba(187, 187, 187, 255));\n"
+"font: 18pt \"Forte\";\n"
+"color: rgb(255, 255, 255);\n"
+"text-align: center;\n"
+"border-radius: 15px;")
         self.song_name.setObjectName("song_name")
+        self.effButton1_2 = QtWidgets.QPushButton(self.main_window)
+        self.effButton1_2.setEnabled(True)
+        self.effButton1_2.setGeometry(QtCore.QRect(20, 180, 61, 51))
+        self.effButton1_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.effButton1_2.setAutoFillBackground(False)
+        self.effButton1_2.setStyleSheet("QPushButton {\n"
+"    color: rgb(190, 200, 186);\n"
+"    border-style: outset;\n"
+"    border-radius: 15px;\n"
+"    background-color: qlineargradient(spread:pad, x1:0.056, y1:0.057, x2:0.449, y2:0.54, stop:0 rgba(154, 135, 255, 255), stop:1 rgba(9, 20, 84, 255));\n"
+"}\n"
+"\n"
+"\n"
+"")
+        self.effButton1_2.setText("")
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap(".\\assets/Folder.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.effButton1_2.setIcon(icon8)
+        self.effButton1_2.setIconSize(QtCore.QSize(50, 50))
+        self.effButton1_2.setObjectName("effButton1_2")
         AudioProcessor.setCentralWidget(self.main_window)
         self.actionWelcome = QtWidgets.QAction(AudioProcessor)
         self.actionWelcome.setObjectName("actionWelcome")
@@ -334,14 +353,12 @@ class Ui_AudioProcessor(object):
     def retranslateUi(self, AudioProcessor):
         _translate = QtCore.QCoreApplication.translate
         AudioProcessor.setWindowTitle(_translate("AudioProcessor", "Audio Proc. 1"))
-        self.song_name.setText(_translate("AudioProcessor",
-                                          "<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">The name of the Song</span></p></body></html>"))
+        self.song_name.setText(_translate("AudioProcessor", "<html><head/><body><p align=\"center\"><span style=\" color:#ffffff;\">The name of the Song</span></p></body></html>"))
         self.actionWelcome.setText(_translate("AudioProcessor", "Welcome!"))
 
 
 if __name__ == "__main__":
     import sys
-
     app = QtWidgets.QApplication(sys.argv)
     AudioProcessor = QtWidgets.QMainWindow()
     ui = Ui_AudioProcessor()
