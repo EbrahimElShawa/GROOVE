@@ -41,6 +41,9 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="main_window">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="palette">
     <palette>
      <active>
@@ -234,7 +237,7 @@
    <property name="styleSheet">
     <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0.5, stop:0 rgba(85, 142, 255, 254), stop:1 rgba(0, 26, 75, 255));</string>
    </property>
-   <widget class="QWidget" name="utilityBar" native="true">
+   <widget class="QWidget" name="utility_bar" native="true">
     <property name="enabled">
      <bool>true</bool>
     </property>
@@ -358,7 +361,7 @@
     background-color: #1D0070;
 }</string>
     </property>
-    <widget class="QPushButton" name="play_button">
+    <widget class="QPushButton" name="pause_button">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -384,9 +387,6 @@
      </property>
      <property name="toolTipDuration">
       <number>-1</number>
-     </property>
-     <property name="whatsThis">
-      <string/>
      </property>
      <property name="styleSheet">
       <string notr="true">
@@ -509,8 +509,8 @@ QPushButton:pressed {
      </property>
      <property name="iconSize">
       <size>
-       <width>75</width>
-       <height>75</height>
+       <width>70</width>
+       <height>70</height>
       </size>
      </property>
      <property name="flat">
@@ -570,6 +570,59 @@ QPushButton:pressed {
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QPushButton" name="volume_button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>135</x>
+       <y>40</y>
+       <width>70</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="toolTipDuration">
+      <number>-1</number>
+     </property>
+     <property name="whatsThis">
+      <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QPushButton:pressed {
+        padding: 3px;
+    }</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>assets/Volume.png</normaloff>assets/Volume.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>70</width>
+       <height>70</height>
+      </size>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+    </widget>
     <widget class="QPushButton" name="previous_button">
      <property name="enabled">
       <bool>true</bool>
@@ -615,8 +668,8 @@ QPushButton:pressed {
      </property>
      <property name="iconSize">
       <size>
-       <width>75</width>
-       <height>75</height>
+       <width>70</width>
+       <height>70</height>
       </size>
      </property>
      <property name="flat">
@@ -629,7 +682,7 @@ QPushButton:pressed {
      </property>
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>995</x>
        <y>40</y>
        <width>70</width>
        <height>70</height>
@@ -664,60 +717,7 @@ QPushButton:pressed {
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>assets/Shuffle.png</normaloff>assets/Shuffle.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>70</width>
-       <height>70</height>
-      </size>
-     </property>
-     <property name="flat">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="volume_button">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>990</x>
-       <y>40</y>
-       <width>70</width>
-       <height>70</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="toolTip">
-      <string notr="true"/>
-     </property>
-     <property name="toolTipDuration">
-      <number>-1</number>
-     </property>
-     <property name="whatsThis">
-      <string/>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">
-QPushButton:pressed {
-        padding: 3px;
-    }</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>assets/Volume.png</normaloff>assets/Volume.png</iconset>
+       <normaloff>assets/ShuffleInactive.png</normaloff>assets/ShuffleInactive.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -796,7 +796,7 @@ text-align: center;
 border-radius: 15px;</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; color:#ffffff;&quot;&gt;The name of the Song&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;_ _ _&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="folder_button">
@@ -837,8 +837,8 @@ border-radius: 15px;</string>
     </property>
     <property name="iconSize">
      <size>
-      <width>50</width>
-      <height>50</height>
+      <width>45</width>
+      <height>45</height>
      </size>
     </property>
    </widget>
@@ -846,9 +846,9 @@ border-radius: 15px;</string>
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>110</y>
-      <width>1001</width>
-      <height>431</height>
+      <y>140</y>
+      <width>970</width>
+      <height>371</height>
      </rect>
     </property>
     <property name="cursor">
@@ -862,20 +862,128 @@ border-radius: 15px;</string>
 
 QSlider::groove:horizontal  {
 	background-color: rgba(255, 255, 255, 0);
-	height: 400px;
 }
 
 QSlider::handle:horizontal {
     background-color: #51A0D5;
-    width: 2px;
-    height: 18px; /* the handle height */
-    border-radius: 9px; /* make the handle round */
+    width: 10px;
+    border-radius: 5px; /* make the handle round */
 }</string>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
+   <widget class="QSlider" name="volume_bar">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>420</y>
+      <width>31</width>
+      <height>170</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QSlider {	background-color: rgba(255, 255, 255, 0);	}
+
+QSlider::groove:vertical  {
+	background-color: rgba(124, 109, 200, 180);
+	border-radius: 10px; 
+}
+
+QSlider::handle:vertical {
+    background-color: #51A0D5;
+    height: 10px;
+    border-radius: 5px;
+}</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="volume_speed">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>1094</x>
+      <y>470</y>
+      <width>71</width>
+      <height>55</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string notr="true"/>
+    </property>
+    <property name="toolTipDuration">
+     <number>-1</number>
+    </property>
+    <property name="whatsThis">
+     <string/>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 0);
+color: rgb(255, 255, 255);
+font: 75 14pt &quot;Microsoft PhagsPa&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>assets/x1Speed.png</normaloff>assets/x1Speed.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>70</width>
+      <height>70</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Ctrl+S</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QWidget" name="util_bar_animation" native="true">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>560</y>
+      <width>1200</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 25px 25px 0px 0px;
+    background-color: #1D0070;</string>
+    </property>
+   </widget>
+   <zorder>util_bar_animation</zorder>
+   <zorder>utility_bar</zorder>
+   <zorder>effects_button</zorder>
+   <zorder>song_name</zorder>
+   <zorder>folder_button</zorder>
+   <zorder>song_progress</zorder>
+   <zorder>volume_bar</zorder>
+   <zorder>volume_speed</zorder>
   </widget>
   <action name="actionWelcome">
    <property name="text">

@@ -266,7 +266,7 @@ class Ui_AudioProcessor(object):
 "    }")
         self.shuffle_button.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("assets/Shuffle_inactive.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap("assets/ShuffleInactive.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.shuffle_button.setIcon(icon5)
         self.shuffle_button.setIconSize(QtCore.QSize(70, 70))
         self.shuffle_button.setFlat(False)

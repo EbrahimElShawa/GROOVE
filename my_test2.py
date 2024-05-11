@@ -1,14 +1,23 @@
-from pydub import AudioSegment
+from ctypes import cast, POINTER
+from comtypes import CLSCTX_ALL, GUID
+from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
+import math
 
-# Convert mp3 to wav file
-# audio = AudioSegment.from_mp3('audio_file.mp3')
-# audio.export('audio_file.wav', format='wav')
 
-audio = AudioSegment.from_file('assets/Cowboy Bebop - Full.wav')
+# Used to control the system volume
+class SystemVolumeController:
+    def __init__(self):
+        devices = AudioUtilities.GetSpeakers()
+        interface = devices.Activate(GUID('{5CDF2C82-841E-4546-9722-0CF74078229A}'), CLSCTX_ALL, None)
+        self.volume = cast(interface, POINTER(IAudioEndpointVolume))
 
-# Extract sample rate and total duration
-sample_rate = audio.frame_rate
-total_duration = len(audio) / 1000  # Duration in seconds
+    def get_volume(self):
+        currentVolumeLevel = self.volume.GetMasterVolumeLevelScalar()
+        # Convert to a percentage and return
+        return currentVolumeLevel * 100
 
-print("Sample rate:", sample_rate)
-print("Total duration:", total_duration, "seconds")
+    def set_volume(self, level):
+        volumeLevel = level / 100
+        # Set the volume level
+        self.volume.SetMasterVolumeLevelScalar(volumeLevel, None)
+
