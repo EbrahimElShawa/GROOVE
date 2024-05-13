@@ -383,10 +383,10 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string notr="true"/>
+      <string notr="true">Pause/Play</string>
      </property>
      <property name="toolTipDuration">
-      <number>-1</number>
+      <number>3000</number>
      </property>
      <property name="styleSheet">
       <string notr="true">
@@ -433,10 +433,10 @@ QPushButton:pressed {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string notr="true"/>
+      <string notr="true">Forward</string>
      </property>
      <property name="toolTipDuration">
-      <number>-1</number>
+      <number>3000</number>
      </property>
      <property name="whatsThis">
       <string/>
@@ -486,10 +486,10 @@ QPushButton:pressed {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string notr="true"/>
+      <string notr="true">Next</string>
      </property>
      <property name="toolTipDuration">
-      <number>-1</number>
+      <number>3000</number>
      </property>
      <property name="whatsThis">
       <string/>
@@ -539,10 +539,10 @@ QPushButton:pressed {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string notr="true"/>
+      <string notr="true">Rewind</string>
      </property>
      <property name="toolTipDuration">
-      <number>-1</number>
+      <number>3000</number>
      </property>
      <property name="whatsThis">
       <string/>
@@ -645,10 +645,10 @@ QPushButton:pressed {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string notr="true"/>
+      <string notr="true">Previous</string>
      </property>
      <property name="toolTipDuration">
-      <number>-1</number>
+      <number>3000</number>
      </property>
      <property name="whatsThis">
       <string/>
@@ -698,10 +698,10 @@ QPushButton:pressed {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string notr="true"/>
+      <string notr="true">Shuffle Playlist</string>
      </property>
      <property name="toolTipDuration">
-      <number>-1</number>
+      <number>3000</number>
      </property>
      <property name="whatsThis">
       <string/>
@@ -744,6 +744,12 @@ QPushButton:pressed {
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>Select Effect</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>3000</number>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
@@ -814,6 +820,12 @@ border-radius: 15px;</string>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
+    <property name="toolTip">
+     <string>Choose a song</string>
+    </property>
+    <property name="toolTipDuration">
+     <number>3000</number>
+    </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
@@ -845,9 +857,9 @@ border-radius: 15px;</string>
    <widget class="QSlider" name="song_progress">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>100</x>
       <y>140</y>
-      <width>970</width>
+      <width>1000</width>
       <height>371</height>
      </rect>
     </property>
@@ -913,7 +925,7 @@ QSlider::handle:vertical {
     </property>
     <property name="geometry">
      <rect>
-      <x>1094</x>
+      <x>1110</x>
       <y>470</y>
       <width>71</width>
       <height>55</height>
@@ -932,7 +944,7 @@ QSlider::handle:vertical {
      <string notr="true"/>
     </property>
     <property name="toolTipDuration">
-     <number>-1</number>
+     <number>3000</number>
     </property>
     <property name="whatsThis">
      <string/>
@@ -976,14 +988,95 @@ font: 75 14pt &quot;Microsoft PhagsPa&quot;;</string>
     background-color: #1D0070;</string>
     </property>
    </widget>
+   <widget class="QLabel" name="time_label">
+    <property name="geometry">
+     <rect>
+      <x>78</x>
+      <y>120</y>
+      <width>56</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 0);
+font: 10pt &quot;Forte&quot;;
+color: rgb(255, 255, 255);
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;00:00&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="volume_level">
+    <property name="geometry">
+     <rect>
+      <x>152</x>
+      <y>395</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 0);
+font: 12pt &quot;Forte&quot;;
+color: rgb(255, 255, 255);
+text-align: center;</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;56&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="context_label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>480</y>
+      <width>621</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>0</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 0);
+font: 16pt &quot;MV Boli&quot;;
+color: rgb(255, 255, 255);
+</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Shuffling music from your library&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+   </widget>
    <zorder>util_bar_animation</zorder>
    <zorder>utility_bar</zorder>
    <zorder>effects_button</zorder>
    <zorder>song_name</zorder>
    <zorder>folder_button</zorder>
    <zorder>song_progress</zorder>
-   <zorder>volume_bar</zorder>
    <zorder>volume_speed</zorder>
+   <zorder>time_label</zorder>
+   <zorder>volume_level</zorder>
+   <zorder>context_label</zorder>
+   <zorder>volume_bar</zorder>
   </widget>
   <action name="actionWelcome">
    <property name="text">

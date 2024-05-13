@@ -1,7 +1,8 @@
 from warnings import filterwarnings
+
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer, QEvent
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QToolTip
 
 import Effects
 import Setup
@@ -12,14 +13,17 @@ filterwarnings("ignore", category=DeprecationWarning)
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        uic.loadUi('test0.ui', self)
+        uic.loadUi('Application.ui', self)
         self.widgets = {"previous_button": self.previous_button, "plus10_button": self.plus10_button,
                         "folder_button": self.folder_button, "effects_button": self.effects_button,
                         "minus10_button": self.minus10_button, "volume_button": self.volume_button,
                         "shuffle_button": self.shuffle_button, "volume_speed": self.volume_speed,
                         "pause_button": self.pause_button, "next_button": self.next_button,
                         "song_progress": self.song_progress, "song_name": self.song_name,
-                        "utility_bar": self.utility_bar, "volume_bar": self.volume_bar}
+                        "time_label": self.time_label, "volume_level": self.volume_level,
+                        "utility_bar": self.utility_bar, "volume_bar": self.volume_bar,
+                        "context_label": self.context_label}
+
         self.initial_setup()
         self.link_effects()
         self.setup = Setup.UIController(self.widgets)
@@ -28,15 +32,16 @@ class MainWindow(QMainWindow):
         if event.type() == QEvent.MouseButtonPress and isinstance(source, QWidget):
             if self.volume_bar.isAncestorOf(source):
                 if self.volume_bar.rect().contains(event.pos()):
-                    self.setup.volume_level(event)
+                    self.setup.volume_level(event, None)
 
             elif self.volume_bar.isVisible():
                 self.volume_bar.hide()
+                self.volume_level.hide()
                 QTimer.singleShot(50, lambda: Effects.enable_animation(self.volume_button))
 
             if self.song_progress.isAncestorOf(source):
                 if self.song_progress.rect().contains(event.pos()):
-                    Setup.song_progress(self.song_progress, event)
+                    self.setup.song_progress(event)
                     # BackEnd.set_song_position(self.song_progress, event)
 
         return super(MainWindow, self).eventFilter(source, event)
@@ -54,12 +59,17 @@ class MainWindow(QMainWindow):
         self.shuffle_button.clicked.connect(lambda: self.setup.toggle_shuffle(self.shuffle_button))
         self.volume_speed.clicked.connect(lambda: self.setup.toggle_speed(self.volume_speed))
         self.folder_button.clicked.connect(lambda: self.setup.open_file(self, self.folder_button))
+        QTimer.singleShot(50, lambda: self.volume_bar.valueChanged.
+                          connect(lambda: self.setup.volume_level(None, self.volume_bar.value(), True)))
+        self.time_label.hide()
+        self.volume_level.hide()
+        self.context_label.hide()
 
     def link_effects(self):
         self.pause_button.pressed.connect(lambda: Effects.default_pressed_animation(self.pause_button))
         self.pause_button.released.connect(
             lambda: QTimer.singleShot(50, lambda: Effects.default_released_animation(self.pause_button)))
-        self.pause_button.clicked.connect(lambda: self.setup.toggle_pause_play(self.pause_button))
+        self.pause_button.clicked.connect(lambda: self.setup.toggle_pause_play())
 
         self.next_button.pressed.connect(lambda: Effects.default_pressed_animation(self.next_button))
         self.next_button.released.connect(

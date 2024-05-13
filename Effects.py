@@ -75,13 +75,13 @@ def glow_effect(widget):
     widget.grow_animation = QPropertyAnimation(effect, b"blurRadius")
     widget.grow_animation.setDuration(2000)  # 1500 milliseconds = 1.5 seconds
     widget.grow_animation.setStartValue(50)  # No glow
-    widget.grow_animation.setEndValue(200)  # Maximum glow
+    widget.grow_animation.setEndValue(300)  # Maximum glow
     widget.grow_animation.setEasingCurve(QEasingCurve.OutInSine)
 
     # Animation for the "shrinking" phase
     widget.shrink_animation = QPropertyAnimation(effect, b"blurRadius")
-    widget.shrink_animation.setDuration(2000)  # 1500 milliseconds = 1.5 seconds
-    widget.shrink_animation.setStartValue(200)  # Maximum glow
+    widget.shrink_animation.setDuration(1000)  # 1500 milliseconds = 1.5 seconds
+    widget.shrink_animation.setStartValue(300)  # Maximum glow
     widget.shrink_animation.setEndValue(50)  # No glow
     widget.shrink_animation.setEasingCurve(QEasingCurve.OutInSine)
 
@@ -130,13 +130,30 @@ def get_random_color(has_green):
     return QColor(red, green, blue)
 
 
-def progress_bar_animation(progress_bar, old_value, new_value):
-    progress_bar.animation = QPropertyAnimation(progress_bar, b"value")
-    progress_bar.animation.setDuration(500)
-    progress_bar.animation.setStartValue(old_value)
-    progress_bar.animation.setEndValue(new_value)
-    progress_bar.animation.setEasingCurve(QEasingCurve.InOutQuad)
-    progress_bar.animation.start()
+def move_animation(widget, prob, old_value, new_value):
+    widget.animation = QPropertyAnimation(widget, prob)
+    widget.animation.setDuration(500)
+    widget.animation.setStartValue(old_value)
+    widget.animation.setEndValue(new_value)
+    widget.animation.setEasingCurve(QEasingCurve.InOutQuad)
+    widget.animation.start()
+
+
+def fading_label_animation(widget):
+    effect = QGraphicsOpacityEffect(widget)
+    widget.setGraphicsEffect(effect)
+
+    widget.animation = QPropertyAnimation(effect, b"opacity")
+    widget.animation.setDuration(1000)
+    widget.animation.setStartValue(1)
+    widget.animation.setEndValue(0)
+    widget.animation.setEasingCurve(QEasingCurve.InOutQuad)
+
+    widget.animation.start()
+    # noinspection PyUnresolvedReferences
+    widget.animation.finished.connect(effect.deleteLater)
+    # noinspection PyUnresolvedReferences
+    widget.animation.finished.connect(widget.hide)
 
 
 class Effects:
