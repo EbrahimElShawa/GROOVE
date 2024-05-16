@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import QFileDialog
 
 class UIController:
     def __init__(self, widgets):
-        self.func = Functionality.AudioPlayer()
+        self.player = Functionality.AudioPlayer()
         self.widgets = widgets
 
         self.is_shuffled, self.is_playing, self.finished = False, False, False
@@ -19,8 +19,8 @@ class UIController:
         # noinspection PyUnresolvedReferences
         self.song_progress_timer.timeout.connect(self.update_song_progress)
 
-        self.set_changes(self.widgets['plus10_button'], self.func.fast_forward)
-        self.set_changes(self.widgets['minus10_button'], self.func.rewind)
+        self.set_changes(self.widgets['plus10_button'], self.player.fast_forward)
+        self.set_changes(self.widgets['minus10_button'], self.player.rewind)
 
         self.volume_bar_setup()
         self.progress_bar_setup()
@@ -41,17 +41,17 @@ class UIController:
     def toggle_pause_play(self):
         pause_button = self.widgets['pause_button']
         if self.is_playing:  # Playing -> Stopped
-            self.func.pause_song()
+            self.player.pause_song()
             pause_button.setIcon(QIcon("assets/Play.png"))
             self.is_playing = not self.is_playing
             self.song_progress_timer.stop()
         else:  # Stopped -> Playing
             if self.finished:
-                self.func.play_song()
+                self.player.play_song()
                 self.toggle_utility_buttons()
                 self.finished = False
             else:
-                self.func.resume_song()
+                self.player.resume_song()
             pause_button.setIcon(QIcon("assets/Pause.png"))
             self.is_playing = not self.is_playing
             self.song_progress_timer.start(500)
@@ -67,18 +67,28 @@ class UIController:
             self.is_shuffled = not self.is_shuffled
 
     def toggle_speed(self, speed_button):
+        if len(self.player.preprocessed_songs) < 4:
+            self.give_context("Still processing...")
+            return
         if self.volume_speed == 1.0:
             self.volume_speed = 1.25
+            self.player.change_speed(1.25)
             speed_button.setIcon(QIcon("assets/x1.2Speed.png"))
         elif self.volume_speed == 1.25:
             self.volume_speed = 1.5
+            self.player.change_speed(1.5)
             speed_button.setIcon(QIcon("assets/x1.5Speed.png"))
         elif self.volume_speed == 1.5:
             self.volume_speed = 2.0
+            self.player.change_speed(2.0)
             speed_button.setIcon(QIcon("assets/x2Speed.png"))
         else:
             self.volume_speed = 1.0
+            self.player.change_speed(1.0)
             speed_button.setIcon(QIcon("assets/x1Speed.png"))
+
+        if not self.is_playing:
+            self.toggle_pause_play()
         # print(volume_speed)  # Debugging
 
     def toggle_utility_buttons(self):
@@ -92,14 +102,14 @@ class UIController:
 
     def volume_level(self, event, value, slider=False):
         if slider:
-            self.func.volume = value / 50
+            self.player.volume = value / 50
             return
         volume_bar = self.widgets['volume_bar']
         value = int(volume_bar.maximum() - ((volume_bar.maximum() - volume_bar.minimum()) *
                                             event.y()) / volume_bar.height())
         volume_bar.setValue(value)
         set_volume_level(self.widgets['volume_level'], value)
-        self.func.volume = value / 50
+        self.player.volume = value / 50
         # print(value)  # Debugging
 
     def set_changes(self, widget, function):
@@ -123,15 +133,17 @@ class UIController:
                 Effects.util_bar_animation(main_window.util_bar_animation)
 
             self.set_song_name(os.path.basename(file_name))
-            self.func.current_song = file_name
+            self.player.original_song = file_name
 
             if not self.is_playing:
                 self.toggle_pause_play()
-            self.func.play_song()
+            self.player.preprocess_audio()
+            self.player.play_song()
 
             folder_name = os.path.dirname(file_name)
-            self.func.get_audio_files(folder_name)
-            self.give_context(folder_name)
+            self.player.get_audio_files(folder_name)
+
+            self.give_context(f'Importing music from: {folder_name}')
 
     def set_song_name(self, text):
         song_name = self.widgets['song_name']
@@ -141,10 +153,11 @@ class UIController:
 
     def update_song_progress(self):
         progress_bar = self.widgets['song_progress']
-        song_position = self.func.get_song_position()
-        song_duration = self.func.get_song_duration()
+        song_position = self.player.get_song_position()
+        song_duration = self.player.get_song_duration()
 
-        if song_position == -1:
+        if song_position == -1 and self.player.current_pos == 0:
+            print('so y')
             self.finished = True
             self.toggle_pause_play()
             self.toggle_utility_buttons()
@@ -190,14 +203,11 @@ class UIController:
     def toggle_slider(volume_bar):
         Effects.show_slider_animation(volume_bar)
 
-    def give_context(self, folder_name):
+    def give_context(self, text):
         context_label = self.widgets['context_label']
-        if context_label.text() == f'Importing music from: {folder_name}/':
-            return
-
-        context_label.setText(f'Importing music from: {folder_name}/')
+        context_label.setText(text)
         context_label.show()
-        QTimer.singleShot(5000, lambda: Effects.fading_label_animation(context_label))
+        QTimer.singleShot(3000, lambda: Effects.fading_label_animation(context_label))
 
 
 def set_volume_level(volume_label, value):
@@ -216,5 +226,3 @@ def set_volume_level(volume_label, value):
     # noinspection PyUnresolvedReferences
     volume_label.animation_countdown.timeout.connect(lambda: Effects.fading_label_animation(volume_label))
     volume_label.animation_countdown.start(2500)
-
-

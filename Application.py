@@ -2,7 +2,7 @@ from warnings import filterwarnings
 
 from PyQt5 import uic
 from PyQt5.QtCore import QTimer, QEvent
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QToolTip
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
 
 import Effects
 import Setup
@@ -61,6 +61,7 @@ class MainWindow(QMainWindow):
         self.folder_button.clicked.connect(lambda: self.setup.open_file(self, self.folder_button))
         QTimer.singleShot(50, lambda: self.volume_bar.valueChanged.
                           connect(lambda: self.setup.volume_level(None, self.volume_bar.value(), True)))
+
         self.time_label.hide()
         self.volume_level.hide()
         self.context_label.hide()
