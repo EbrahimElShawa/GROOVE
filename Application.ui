@@ -35,7 +35,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Audio Proc. 1</string>
+   <string>Groove</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assets/Groove.png</normaloff>assets/Groove.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -1066,16 +1070,30 @@ color: rgb(255, 255, 255);
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
+   <widget class="QWidget" name="waveform_widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>140</y>
+      <width>1000</width>
+      <height>370</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+    </property>
+   </widget>
    <zorder>util_bar_animation</zorder>
    <zorder>utility_bar</zorder>
    <zorder>effects_button</zorder>
    <zorder>song_name</zorder>
    <zorder>folder_button</zorder>
-   <zorder>song_progress</zorder>
    <zorder>volume_speed</zorder>
    <zorder>time_label</zorder>
    <zorder>volume_level</zorder>
    <zorder>context_label</zorder>
+   <zorder>waveform_widget</zorder>
+   <zorder>song_progress</zorder>
    <zorder>volume_bar</zorder>
   </widget>
   <action name="actionWelcome">

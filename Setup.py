@@ -1,29 +1,39 @@
 import os
-import Effects
-import Functionality
 
 from PyQt5.QtCore import QTimer, Qt, QPoint
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QIcon, QColor, QPainterPath, QPen, QPainter, QImage
+from PyQt5.QtWidgets import QFileDialog, QWidget
+
+import Effects
+import Functionality
 
 
 class UIController:
     def __init__(self, widgets):
-        self.player = Functionality.AudioPlayer()
+        self.waveform_data = None
+        self.song_name = None
+        self.player = Functionality.AudioPlayer(self.set_song_name, self.give_context)
         self.widgets = widgets
+        self.waveform_plot = None
 
-        self.is_shuffled, self.is_playing, self.finished = False, False, False
+        self.is_playing, self.finished = False, False
         self.volume_speed = 1.0
 
         self.song_progress_timer = QTimer()
+        self.process_timer = QTimer()
         # noinspection PyUnresolvedReferences
         self.song_progress_timer.timeout.connect(self.update_song_progress)
+        self.process_timer.setInterval(3000)
+        # noinspection PyUnresolvedReferences
+        self.process_timer.timeout.connect(self.check_process)
 
         self.set_changes(self.widgets['plus10_button'], self.player.fast_forward)
         self.set_changes(self.widgets['minus10_button'], self.player.rewind)
 
         self.volume_bar_setup()
         self.progress_bar_setup()
+        self.next_setup()
+        self.prev_setup()
 
     def volume_bar_setup(self):
         volume_bar = self.widgets['volume_bar']
@@ -37,6 +47,20 @@ class UIController:
         progress_bar.setRange(0, 1000)
         progress_bar.setValue(0)
         progress_bar.setTickInterval(5)
+
+    def next_setup(self):
+        context = 'Please wait until process are finished..'
+        if self.process_timer.isActive():
+            self.give_context(context)
+        self.widgets['next_button'].clicked.connect(lambda: (self.player.next_song(), self.update_song_progress(),
+                                                             self.plot_waveform(), self.process_timer.start()))
+
+    def prev_setup(self):
+        context = 'Please wait until process are finished..'
+        if self.process_timer.isActive():
+            self.give_context(context)
+        self.widgets['previous_button'].clicked.connect(lambda: (self.player.previous_song(), self.update_song_progress(),
+                                                                 self.plot_waveform(), self.process_timer.start()))
 
     def toggle_pause_play(self):
         pause_button = self.widgets['pause_button']
@@ -59,15 +83,17 @@ class UIController:
     def toggle_shuffle(self, shuffle_button):  # disabling the button should be done when doing the backend stuff
         Effects.default_clicked_animation(shuffle_button, 500)
 
-        if self.is_shuffled:  # Shuffled -> Not Shuffled
+        if self.player.shuffled:  # Shuffled -> Not Shuffled
             shuffle_button.setIcon(QIcon("assets/ShuffleInactive.png"))
-            self.is_shuffled = not self.is_shuffled
+            self.player.shuffled = not self.player.shuffled
+            self.give_context('Stopped shuffling..')
         else:  # Not Shuffled -> Shuffled
             shuffle_button.setIcon(QIcon("assets/ShuffleActive.png"))
-            self.is_shuffled = not self.is_shuffled
+            self.player.shuffled = not self.player.shuffled
+            self.give_context('Shuffling..')
 
     def toggle_speed(self, speed_button):
-        if len(self.player.preprocessed_songs) < 4:
+        if len(self.player.preprocessed_songs) < 3:
             self.give_context("Still processing...")
             return
         if self.volume_speed == 1.0:
@@ -132,18 +158,25 @@ class UIController:
                 self.widgets['time_label'].show()
                 Effects.util_bar_animation(main_window.util_bar_animation)
 
-            self.set_song_name(os.path.basename(file_name))
-            self.player.original_song = file_name
-
+            self.song_name = os.path.basename(file_name)
+            self.set_song_name(self.song_name)
             if not self.is_playing:
                 self.toggle_pause_play()
-            self.player.preprocess_audio()
-            self.player.play_song()
 
             folder_name = os.path.dirname(file_name)
             self.player.get_audio_files(folder_name)
+            self.player.current_song_index = self.player.songs.index(os.path.basename(file_name))
+            self.player.current_song = os.path.join(self.player.working_directory,
+                                                    self.player.songs[self.player.current_song_index])
 
+            self.player.play_song()
+            self.plot_waveform()
+            self.player.preprocess_audio()
+            self.process_timer.start()
             self.give_context(f'Importing music from: {folder_name}')
+
+    def open_effects(self):
+        self.give_context('Coming soon.. Stay tuned!')
 
     def set_song_name(self, text):
         song_name = self.widgets['song_name']
@@ -155,13 +188,6 @@ class UIController:
         progress_bar = self.widgets['song_progress']
         song_position = self.player.get_song_position()
         song_duration = self.player.get_song_duration()
-
-        if song_position == -1 and self.player.current_pos == 0:
-            print('so y')
-            self.finished = True
-            self.toggle_pause_play()
-            self.toggle_utility_buttons()
-            return
 
         current = progress_bar.value()
         progress = (song_position / song_duration) * 1000
@@ -194,20 +220,86 @@ class UIController:
         relative_x = event.x() / progress_slider.width()
         value = range_start + (range_width * relative_x)
         progress_slider.setValue(int(value))
-        if value >= 999:
-            self.finished = True
-        # print(value)  # Debugging
+        self.player.set_song_position(value / 1000)
+        print(value)  # Debugging
         # song_progress.sliderReleased.connect(lambda: self.func.set_song_position(song_progress.value())) da heck?!
 
-    @staticmethod
-    def toggle_slider(volume_bar):
-        Effects.show_slider_animation(volume_bar)
+    def plot_waveform(self):
+        clear_layout(self.widgets['waveform_layout'])
+        waveform = WaveformWidget()
+
+        self.waveform_data = self.player.read_waveform()
+        waveform.set_waveform_data(self.waveform_data)
+
+        self.widgets['waveform_layout'].addWidget(waveform)
+        waveform.lower()
+
+        self.widgets['waveform_widget'] = waveform
 
     def give_context(self, text):
         context_label = self.widgets['context_label']
         context_label.setText(text)
         context_label.show()
         QTimer.singleShot(3000, lambda: Effects.fading_label_animation(context_label))
+
+    def check_process(self):
+        if self.player.process_finished_event.is_set():
+            self.player.process_finished_event.clear()
+            self.give_context('Finished processing..')
+            self.process_timer.stop()
+
+
+class WaveformWidget(QWidget):
+    def __init__(self, parent=None):
+        super(WaveformWidget, self).__init__(parent)
+        self.waveform_data = None
+        self.buffer = None
+
+    def set_waveform_data(self, data):
+        self.waveform_data = None
+        self.buffer = None
+
+        self.waveform_data = data
+        self.update()
+
+    def paintEvent(self, event):
+        if self.waveform_data is None:
+            return
+
+        if self.buffer is None:
+            # Create the buffer and draw the waveform to the buffer
+            self.buffer = QImage(self.size(), QImage.Format_ARGB32)
+            self.buffer.fill(Qt.transparent)
+
+            painter = QPainter(self.buffer)
+            painter.setRenderHint(QPainter.Antialiasing)
+
+            pen = QPen(QColor("#dcdcdc"))
+            pen.setWidth(2)
+            painter.setPen(pen)
+
+            width = 1000
+            height = 370
+            data_len = len(self.waveform_data)
+
+            x_scale = width / data_len
+            y_center = height / 2
+
+            path = QPainterPath()
+            path.moveTo(100, 325)
+
+            # Only draw a line for every nth data point
+            n = max(1, data_len // width)
+            for i in range(n, data_len, n):
+                x = 95 + i * x_scale
+                y = y_center - self.waveform_data[i] * y_center * 1.0
+                path.lineTo(x, y + 140)
+
+            painter.drawPath(path)
+
+        # Copy the buffer to the screen
+        painter = QPainter(self)
+        painter.drawImage(0, 0, self.buffer)
 
 
 def set_volume_level(volume_label, value):
@@ -226,3 +318,14 @@ def set_volume_level(volume_label, value):
     # noinspection PyUnresolvedReferences
     volume_label.animation_countdown.timeout.connect(lambda: Effects.fading_label_animation(volume_label))
     volume_label.animation_countdown.start(2500)
+
+
+def toggle_slider(volume_bar):
+    Effects.show_slider_animation(volume_bar)
+
+
+def clear_layout(layout):
+    while layout.count():
+        child = layout.takeAt(0)
+        if child.widget():
+            child.widget().deleteLater()
