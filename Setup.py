@@ -1,4 +1,5 @@
 import os
+from warnings import filterwarnings
 
 from PyQt5.QtCore import QTimer, Qt, QPoint
 from PyQt5.QtGui import QIcon, QColor, QPainterPath, QPen, QPainter, QImage
@@ -6,6 +7,8 @@ from PyQt5.QtWidgets import QFileDialog, QWidget
 
 import Effects
 import Functionality
+
+filterwarnings("ignore", category=DeprecationWarning)
 
 
 class UIController:
@@ -173,7 +176,7 @@ class UIController:
             self.plot_waveform()
             self.player.preprocess_audio()
             self.process_timer.start()
-            self.give_context(f'Importing music from: {folder_name}')
+            self.give_context(f'Importing Audio from: {folder_name}')
 
     def open_effects(self):
         self.give_context('Coming soon.. Stay tuned!')
@@ -209,7 +212,7 @@ class UIController:
         time_label.setText(f'{minutes}:{seconds}')
         time_label.setAlignment(Qt.AlignCenter)
 
-        new_position = QPoint(int(80 + progress * 0.98), 120)  # Base x-axis for time_label = 78
+        new_position = QPoint(int(80 + progress * 0.98), 120)  # Base x-axis for time_label = 80
         Effects.move_animation(time_label, b'pos', time_label.pos(), new_position)
 
     def song_progress(self, event):
@@ -221,8 +224,6 @@ class UIController:
         value = range_start + (range_width * relative_x)
         progress_slider.setValue(int(value))
         self.player.set_song_position(value / 1000)
-        print(value)  # Debugging
-        # song_progress.sliderReleased.connect(lambda: self.func.set_song_position(song_progress.value())) da heck?!
 
     def plot_waveform(self):
         clear_layout(self.widgets['waveform_layout'])
@@ -292,7 +293,7 @@ class WaveformWidget(QWidget):
             n = max(1, data_len // width)
             for i in range(n, data_len, n):
                 x = 95 + i * x_scale
-                y = y_center - self.waveform_data[i] * y_center * 1.0
+                y = y_center - self.waveform_data[i] * y_center
                 path.lineTo(x, y + 140)
 
             painter.drawPath(path)

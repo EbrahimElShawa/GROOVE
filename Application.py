@@ -49,7 +49,6 @@ class MainWindow(QMainWindow):
             if self.song_progress.isAncestorOf(source):
                 if self.song_progress.rect().contains(event.pos()):
                     self.setup.song_progress(event)
-                    # BackEnd.set_song_position(self.song_progress, event)
 
         return super(MainWindow, self).eventFilter(source, event)
 

@@ -67,22 +67,19 @@ def show_slider_animation(volume_bar):
 def glow_effect(widget):
     effect = QGraphicsDropShadowEffect()
     effect.setColor(get_random_color(has_green=True))
-    # I want the effect to be outside the button by a little bit
     effect.setOffset(0)
     widget.setGraphicsEffect(effect)
 
-    # Animation for the "growing" phase
     widget.grow_animation = QPropertyAnimation(effect, b"blurRadius")
-    widget.grow_animation.setDuration(2000)  # 1500 milliseconds = 1.5 seconds
-    widget.grow_animation.setStartValue(50)  # No glow
-    widget.grow_animation.setEndValue(300)  # Maximum glow
+    widget.grow_animation.setDuration(2000)
+    widget.grow_animation.setStartValue(50)
+    widget.grow_animation.setEndValue(300)
     widget.grow_animation.setEasingCurve(QEasingCurve.OutInSine)
 
-    # Animation for the "shrinking" phase
     widget.shrink_animation = QPropertyAnimation(effect, b"blurRadius")
-    widget.shrink_animation.setDuration(1000)  # 1500 milliseconds = 1.5 seconds
-    widget.shrink_animation.setStartValue(300)  # Maximum glow
-    widget.shrink_animation.setEndValue(50)  # No glow
+    widget.shrink_animation.setDuration(1000)
+    widget.shrink_animation.setStartValue(300)
+    widget.shrink_animation.setEndValue(50)
     widget.shrink_animation.setEasingCurve(QEasingCurve.OutInSine)
 
     widget.grow_animation.start()
@@ -154,8 +151,3 @@ def fading_label_animation(widget):
     widget.animation.finished.connect(effect.deleteLater)
     # noinspection PyUnresolvedReferences
     widget.animation.finished.connect(widget.hide)
-
-
-class Effects:
-    def __init__(self):
-        pass
